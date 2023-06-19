@@ -1,0 +1,48 @@
+properties([parameters([
+    string(defaultValue: 'main', description: 'Toolchain Branch Name', name: 'ToolchainBranchName'),
+    string(defaultValue: 'main', description: 'Cheribuild Branch Name', name: 'CheribuildBranchName'),
+    string(defaultValue: 'rust-cheri-1.67.0', description: 'Rust Branch Name', name: 'RustBranchName'),
+])])
+
+String JobName = ""
+if (params.RustBranchName != 'rust-cheri-1.67.0') {
+  if (JobName != "") JobName = JobName + ','; JobName = JobName + 'rust-cheri:' + params.RustBranchName
+}
+
+node('builder') {
+  stage('Cleanup') {
+    deleteDir()
+  }
+
+  stage('Checkout') {
+    dir('toolchain') {
+      checkout scm
+    }
+    image = docker.build('vigilance-morello-buildenv',
+                         '-f toolchain/jenkins/Dockerfile toolchain/jenkins')
+    image.inside {
+      dir('toolchain') {
+        sh script: '''./scripts/clone.sh'''
+        sh script: '''./scripts/checkout.sh \
+                      --toolchain-branch=${ToolchainBranchName} \
+                      --cheribuild-branch=${CheribuildBranchName} \
+                      --rust-branch=${RustBranchName}'''
+      }
+    }
+  }
+
+  stage('Build') {
+    timeout(120) {
+      image.inside {
+        dir ('toolchain') {
+          // cheribuild places its outputs in the HOME directory, but on
+          // Jenkins that's not part of the workspace. Set HOME to the Jenkins
+          // workspace directory instead.
+          withEnv(['HOME=/home/jenkins/workspace/vigilance-test']) {
+            sh script: '''./scripts/build.sh'''
+          }
+        }
+      }
+    }
+  }
+}
