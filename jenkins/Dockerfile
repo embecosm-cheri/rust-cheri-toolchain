@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
     libglib2.0-dev \
     libpixman-1-dev \
     libtool \
+    netcat-openbsd \
     ninja-build \
     pkg-config \
     python3 \
