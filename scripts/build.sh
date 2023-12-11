@@ -23,6 +23,11 @@ PATH=${CHERIDIR}/morello-sdk/bin:${PATH}
   set -e
   cd ${TOPDIR}/rust
   cp config.toml.morello config.toml
+  rm Cargo.lock
+  (./x.py build --target=morello-unknown-freebsd-purecap library/std || true)
+  cargo update -p tinystr@0.7.5 --precise 0.7.1
+  cargo update -p tracing-tree@0.2.5 --precise 0.2.4
+  cargo update -p home@0.5.9 --precise 0.5.5
   ./x.py build --target=morello-unknown-freebsd-purecap library/std
 )
 

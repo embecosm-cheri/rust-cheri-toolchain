@@ -12,6 +12,12 @@ PATH=${CHERIDIR}/morello-sdk/bin:${PATH}
 
 mkdir -p ${TOPDIR}/toolchain/test-output
 
+(
+  set -e
+  cd ${TOPDIR}/rust
+  cargo update -p colored@2.1.0 --precise 2.0.4
+)
+
 # First we need to build a test server to go on the QEMU CheriBSD instance so
 # we can attach to it.
 (

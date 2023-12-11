@@ -15,6 +15,12 @@ mkdir -p ${TOPDIR}/toolchain/test-output
 (
   set -e
   cd ${TOPDIR}/rust
+  cargo update -p colored@2.1.0 --precise 2.0.4
+)
+
+(
+  set -e
+  cd ${TOPDIR}/rust
   ./x.py test assembly --target=morello-unknown-freebsd-purecap \
       --test-args="--logfile=${TOPDIR}/toolchain/test-output/compilation-assembly.log" \
       --force-rerun > ${TOPDIR}/toolchain/test-output/compilation-assembly.stdout 2>&1

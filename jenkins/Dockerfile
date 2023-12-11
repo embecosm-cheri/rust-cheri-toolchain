@@ -4,6 +4,7 @@ FROM ubuntu:22.04
 # Install necessary dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
+    cargo \
     cmake \
     curl \
     git \
