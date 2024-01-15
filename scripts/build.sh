@@ -74,6 +74,10 @@ fi
   cargo update -p tinystr@0.7.5 --precise 0.7.1
   cargo update -p tracing-tree@0.2.5 --precise 0.2.4
   cargo update -p home@0.5.9 --precise 0.5.5
+  (
+    cd src/bootstrap
+    cargo update -p home@0.5.9 --precise 0.5.5
+  )
   ./x.py build ${TARGETS_STR} library/std
 )
 
