@@ -31,6 +31,18 @@ for opt in ${@}; do
   "--no-pull")
     PULL=no
     ;;
+  "--linux")
+    LINUX_TARGET=yes
+    ;;
+  "--no-linux")
+    LINUX_TARGET=no
+    ;;
+  "--freebsd")
+    FREEBSD_TARGET=yes
+    ;;
+  "--no-freebsd")
+    FREEBSD_TARGET=no
+    ;;
   --toolchain-branch=*)
     TOOLCHAIN_OVERRIDE="${opt#*=}"
     ;;
