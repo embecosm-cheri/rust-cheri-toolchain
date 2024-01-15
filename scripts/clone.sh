@@ -46,5 +46,5 @@ if [ "${FREEBSD_TARGET}" == "yes" -a ! -d ${TOPDIR}/cheribuild ]; then
   git clone https://github.com/CTSRD-CHERI/cheribuild.git ${TOPDIR}/cheribuild
 fi
 if [ ! -d ${TOPDIR}/rust ]; then
-  git clone https://github.com/CyberHive/rust-cheri.git ${TOPDIR}/rust
+  git clone --recurse-submodules https://github.com/CyberHive/rust-cheri.git ${TOPDIR}/rust
 fi
