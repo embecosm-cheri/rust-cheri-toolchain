@@ -53,6 +53,16 @@ if [ "${LINUX_TARGET}" == "yes" ]; then
     cd ${TOPDIR}/morello-sdk/morello
     ./scripts/build-all.sh --x86_64 --rootfs --build-lib --install --clean
   )
+  (
+    set -e
+    cd ${HOME}/morello/llvm/bin
+    ln -sf ar aarch64-unknown-linux-musl_purecap-ar
+    ln -sf clang aarch64-unknown-linux-musl_purecap-clang
+    ln -sf clang++ aarch64-unknown-linux-musl_purecap-clang++
+    ln -sf clang aarch64-unknown-linux-musl_purecap-cc
+    ln -sf lld aarch64-unknown-linux-musl_purecap-lld
+    ln -sf ld.lld aarch64-unknown-linux-musl_purecap-ld.lld
+  )
   PATH=${HOME}/morello/llvm/bin:${PATH}
 fi
 
