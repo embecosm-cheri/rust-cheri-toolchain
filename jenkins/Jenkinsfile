@@ -36,12 +36,12 @@ node('builder') {
                          '-f toolchain/jenkins/Dockerfile toolchain/jenkins')
     image.inside {
       dir('toolchain') {
-        sh script: '''./scripts/clone.sh ${TargetArgs}'''
-        sh script: '''./scripts/checkout.sh \
+        sh script: """./scripts/clone.sh ${TargetArgs}"""
+        sh script: """./scripts/checkout.sh \
                       --toolchain-branch=${ToolchainBranchName} \
                       --morello-sdk-branch=${MorelloSDKBranchName} \
                       --cheribuild-branch=${CheribuildBranchName} \
-                      --rust-branch=${RustBranchName} ${TargetArgs}'''
+                      --rust-branch=${RustBranchName} ${TargetArgs}"""
       }
     }
   }
@@ -55,7 +55,7 @@ node('builder') {
             // Jenkins that's not part of the workspace. Set HOME to the Jenkins
             // workspace directory instead.
             withEnv(['HOME=/home/jenkins/workspace/vigilance-test']) {
-              sh script: '''./scripts/build.sh ${TargetArgs}'''
+              sh script: """./scripts/build.sh ${TargetArgs}"""
             }
           }
           if (params.ArchiveToolchain) {
@@ -86,7 +86,7 @@ node('builder') {
           image.inside {
             dir ('toolchain') {
               withEnv(['HOME=/home/jenkins/workspace/vigilance-test']) {
-                sh script: '''./scripts/test-compilation.sh'''
+                sh script: """./scripts/test-compilation.sh"""
               }
             }
           }
@@ -107,7 +107,7 @@ node('builder') {
           image.inside {
             dir ('toolchain') {
               withEnv(['HOME=/home/jenkins/workspace/vigilance-test']) {
-                sh script: '''./scripts/test-execution.sh'''
+                sh script: """./scripts/test-execution.sh"""
               }
             }
           }
