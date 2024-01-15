@@ -43,8 +43,8 @@ if [ "${FREEBSD_TARGET}" == "yes" ]; then
     set -e
     cd ${TOPDIR}/cheribuild
     ./cheribuild.py cheribsd-sdk-morello-purecap --qemu/no-use-smbd --skip-update
-    PATH=${HOME}/cheri/output/morello-sdk/bin:${PATH}
   )
+  PATH=${HOME}/cheri/output/morello-sdk/bin:${PATH}
 fi
 
 if [ "${LINUX_TARGET}" == "yes" ]; then
@@ -52,8 +52,8 @@ if [ "${LINUX_TARGET}" == "yes" ]; then
     set -e
     cd ${TOPDIR}/morello-sdk/morello
     ./scripts/build-all.sh --x86_64 --rootfs --build-lib --install --clean
-    PATH=${HOME}/morello/llvm/bin:${PATH}
   )
+  PATH=${HOME}/morello/llvm/bin:${PATH}
 fi
 
 # Build Rust for appropriate Morello targets.
