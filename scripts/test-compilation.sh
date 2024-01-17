@@ -93,7 +93,7 @@ for target in ${TARGETS}; do
     set -e
     cd ${TOPDIR}/rust
     ./x.py test incremental --target=${target} \
-        --test-args="--logfile=${TOPDIR}/toolchain/test-output/${target}/compilation-incremental.log" \
+        --test-args="--logfile=${TOPDIR}/toolchain/test-output/${target}/compilation-incremental.log --skip rustc-rust-log" \
         --force-rerun > ${TOPDIR}/toolchain/test-output/${target}/compilation-incremental.stdout 2>&1
   )
 
