@@ -86,7 +86,7 @@ node('builder') {
           image.inside {
             dir ('toolchain') {
               withEnv(['HOME=/home/jenkins/workspace/vigilance-test']) {
-                sh script: """./scripts/test-compilation.sh"""
+                sh script: """./scripts/test-compilation.sh ${TargetArgs}"""
               }
             }
           }
