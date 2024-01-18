@@ -47,7 +47,7 @@ node('builder') {
   }
 
   stage('Build') {
-    timeout(120) {
+    timeout(180) {
       try {
         image.inside {
           dir ('toolchain') {
@@ -81,7 +81,7 @@ node('builder') {
 
   stage('Compilation Tests') {
     if (params.RustCompileTests) {
-      timeout(60) {
+      timeout(180) {
         try {
           image.inside {
             dir ('toolchain') {
@@ -94,7 +94,7 @@ node('builder') {
         catch (Exception e) {}
         finally {
           archiveArtifacts allowEmptyArchive: true, fingerprint: true,
-            artifacts: 'toolchain/test-output/compilation*'
+            artifacts: 'toolchain/test-output/morello-unknown-*-purecap/compilation*'
         }
       }
     }
@@ -102,12 +102,12 @@ node('builder') {
 
   stage('Execution Tests') {
     if (params.RustExecuteTests) {
-      timeout(60) {
+      timeout(180) {
         try {
           image.inside {
             dir ('toolchain') {
               withEnv(['HOME=/home/jenkins/workspace/vigilance-test']) {
-                sh script: """./scripts/test-execution.sh"""
+                sh script: """./scripts/test-execution.sh ${TargetArgs}"""
               }
             }
           }
@@ -115,7 +115,7 @@ node('builder') {
         catch (Exception e) {}
         finally {
           archiveArtifacts allowEmptyArchive: true, fingerprint: true,
-            artifacts: 'toolchain/test-output/execution*'
+            artifacts: 'toolchain/test-output/morello-unknown-*-purecap/execution*'
         }
       }
     }
