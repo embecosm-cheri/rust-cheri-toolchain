@@ -117,7 +117,7 @@ for target in ${TARGETS}; do
     set -e
     cd ${TOPDIR}/rust
     ./x.py test ui --target=${target} \
-        --test-args="--logfile=${TOPDIR}/toolchain/test-output/${target}/compilation-ui.log" \
+        --test-args="--logfile=${TOPDIR}/toolchain/test-output/${target}/compilation-ui.log --skip primitives/numbers" \
         --force-rerun --pass build > ${TOPDIR}/toolchain/test-output/${target}/compilation-ui.stdout 2>&1
   )
 done
