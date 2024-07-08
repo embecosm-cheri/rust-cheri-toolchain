@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
     ninja-build \
     pkg-config \
     python3 \
+    sshpass \
     time \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
