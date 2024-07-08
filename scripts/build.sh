@@ -80,13 +80,20 @@ fi
   cd ${TOPDIR}/rust
   cp config.toml.morello config.toml
   rm Cargo.lock
+<<<<<<< Updated upstream
   (./x.py build ${TARGETS_STR} library/std || true)
-  cargo update -p tinystr@0.7.5 --precise 0.7.1
+  cargo update -p url@2.5.1 --precise 2.5.0
+=======
+  ./x.py build ${TARGETS_STR} library/std || true
+  cargo update -p url@2.5.2 --precise 2.5.0
+>>>>>>> Stashed changes
+  cargo update -p tinystr@0.7.6 --precise 0.7.1
   cargo update -p tracing-tree@0.2.5 --precise 0.2.4
   cargo update -p home@0.5.9 --precise 0.5.5
-  cargo update -p thiserror@1.0.60 --precise 1.0.59
-  cargo update -p serde_json@1.0.117 --precise 1.0.116
+  cargo update -p thiserror@1.0.61 --precise 1.0.59
+  cargo update -p serde_json@1.0.120 --precise 1.0.116
   cargo update -p mdbook@0.4.37 --precise 0.4.36
+  cargo update -p crossbeam-utils@0.8.20 --precise 0.8.19
   (
     cd src/bootstrap
     cargo update -p home@0.5.9 --precise 0.5.5
