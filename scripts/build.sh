@@ -80,13 +80,8 @@ fi
   cd ${TOPDIR}/rust
   cp config.toml.morello config.toml
   rm Cargo.lock
-<<<<<<< Updated upstream
-  (./x.py build ${TARGETS_STR} library/std || true)
-  cargo update -p url@2.5.1 --precise 2.5.0
-=======
   ./x.py build ${TARGETS_STR} library/std || true
   cargo update -p url@2.5.2 --precise 2.5.0
->>>>>>> Stashed changes
   cargo update -p tinystr@0.7.6 --precise 0.7.1
   cargo update -p tracing-tree@0.2.5 --precise 0.2.4
   cargo update -p home@0.5.9 --precise 0.5.5
