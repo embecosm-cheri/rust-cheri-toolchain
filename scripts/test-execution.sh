@@ -115,7 +115,7 @@ fi
 if [ "${LINUX_TARGET}" == "yes" ]; then
   # Make sure the remote test server is copied to the Morello box, and set it running.
   # Incredibly insecure if we actually care about protecting access to the Morello box, but we don't.
-  scp --rsh="sshpass -pmorello" ${TOPDIR}/rust/build/*/stage1-tools/morello-unknown-linux-purecap/*/remote-test-server root@${MORELLO_LINUX_IP}:
+  sshpass -pmorello scp ${TOPDIR}/rust/build/*/stage1-tools/morello-unknown-linux-purecap/*/remote-test-server root@${MORELLO_LINUX_IP}:
   sshpass -pmorello ssh -o StrictHostKeyChecking=no -l root@${MORELLO_LINUX_IP} "./remote-test-server --bind 0.0.0.0:12345"
 
   # We can now start the tests!
@@ -125,7 +125,8 @@ if [ "${LINUX_TARGET}" == "yes" ]; then
     export TEST_DEVICE_ADDR="${MORELLO_LINUX_IP}:12345"
     ./x.py test ui --target=morello-unknown-linux-purecap \
         --test-args="--logfile=${TOPDIR}/toolchain/test-output/execution-ui.log" \
-        --force-rerun --pass run > ${TOPDIR}/toolchain/test-output/execution-ui.stdout 2>&1
+        --rustc-args="-C linker=aarch64-unknown-linux-musl_purecap-clang -C link-arg=-fuse-ld=lld -C link-arg=--sysroot=$HOME/morello/musl/ -C link-self-contained=no" \
+        --force-rerun > ${TOPDIR}/toolchain/test-output/execution-ui.stdout 2>&1
   )
 
 fi
