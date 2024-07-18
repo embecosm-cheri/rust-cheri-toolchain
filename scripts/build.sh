@@ -85,7 +85,7 @@ fi
   cargo update -p tinystr@0.7.6 --precise 0.7.1
   cargo update -p tracing-tree@0.2.5 --precise 0.2.4
   cargo update -p home@0.5.9 --precise 0.5.5
-  cargo update -p thiserror@1.0.61 --precise 1.0.59
+  cargo update -p thiserror@1.0.63 --precise 1.0.59
   cargo update -p serde_json@1.0.120 --precise 1.0.116
   cargo update -p mdbook@0.4.37 --precise 0.4.36
   cargo update -p crossbeam-utils@0.8.20 --precise 0.8.19
