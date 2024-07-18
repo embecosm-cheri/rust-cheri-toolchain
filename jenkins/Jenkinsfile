@@ -54,7 +54,7 @@ node('builder') {
             // cheribuild places its outputs in the HOME directory, but on
             // Jenkins that's not part of the workspace. Set HOME to the Jenkins
             // workspace directory instead.
-            withEnv(['HOME=/home/jenkins/workspace/vigilance-test']) {
+            withEnv(['HOME='+WORKSPACE]) {
               sh script: """./scripts/build.sh ${TargetArgs}"""
             }
           }
@@ -85,7 +85,7 @@ node('builder') {
         try {
           image.inside {
             dir ('toolchain') {
-              withEnv(['HOME=/home/jenkins/workspace/vigilance-test']) {
+              withEnv(['HOME='+WORKSPACE]) {
                 sh script: """./scripts/test-compilation.sh ${TargetArgs}"""
               }
             }
@@ -106,7 +106,7 @@ node('builder') {
         try {
           image.inside {
             dir ('toolchain') {
-              withEnv(['HOME=/home/jenkins/workspace/vigilance-test']) {
+              withEnv(['HOME='+WORKSPACE]) {
                 sh script: """./scripts/test-execution.sh ${TargetArgs}"""
               }
             }
