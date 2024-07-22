@@ -115,8 +115,8 @@ fi
 if [ "${LINUX_TARGET}" == "yes" ]; then
   # Make sure the remote test server is copied to the Morello box, and set it running.
   # Incredibly insecure if we actually care about protecting access to the Morello box, but we don't.
-  sshpass -pmorello scp ${TOPDIR}/rust/build/*/stage1-tools/morello-unknown-linux-purecap/*/remote-test-server root@${MORELLO_LINUX_IP}:
-  sshpass -pmorello ssh -o StrictHostKeyChecking=no -l root@${MORELLO_LINUX_IP} "./remote-test-server --bind 0.0.0.0:12345"
+  sshpass -pmorello scp -o StrictHostKeyChecking=no ${TOPDIR}/rust/build/*/stage1-tools/morello-unknown-linux-purecap/*/remote-test-server root@${MORELLO_LINUX_IP}:
+  sshpass -pmorello ssh -o StrictHostKeyChecking=no root@${MORELLO_LINUX_IP} './remote-test-server --bind 0.0.0.0:12345' &
 
   # We can now start the tests!
   (
